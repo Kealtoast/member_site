@@ -6,6 +6,9 @@ if (isset($_POST['submit'])) {
 	$email = mysqli_real_escape_string($conn, $_POST['email']);
 	$uid = mysqli_real_escape_string($conn, $_POST['uid']);
 	$pwd = mysqli_real_escape_string($conn, $_POST['pwd']);
+	date_default_timezone_set("America/North_Dakota/Center");
+	$date = date("Y-m-d H:i:s");
+	
 
 	//Error handlers
 	//Check if fields are empty
@@ -31,7 +34,7 @@ if (isset($_POST['submit'])) {
 					//Hashing the password
 					$hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
 					//Insert the user into the database
-					$sql = "INSERT INTO users (user_first, user_last, user_email, user_uid, user_pwd) VALUES ('$first','$last','$email','$uid','$hashedPwd');";
+					$sql = "INSERT INTO users (user_first, user_last, user_email, user_uid, user_pwd, user_signup_date) VALUES ('$first','$last','$email','$uid','$hashedPwd','$date');";
 					mysqli_query($conn, $sql);
 					$sql = "SELECT * FROM users WHERE user_uid=".$uid;
 					$result = mysqli_query($conn, $sql);
@@ -39,7 +42,7 @@ if (isset($_POST['submit'])) {
 					$id = $row['user_id'];
 					$sql = "INSERT INTO perm (user_id, perm_profile_section, perm_application_section, prem_edit_blog) VALUES ('$id','0','0','0');";
 					mysqli_query($conn, $sql);
-					header("Location: ../signup.php?signup=successful");
+					header("Location: ../signup.php?signup=successful".$date);
 					exit();
 
 				}

@@ -46,8 +46,12 @@
 			<li><a href="">Booking</a></li>
 			<li><a href="">Blog</a></li>
 			<?php 
-				if (isset($_SESSION['u_id'])) {
+				if (isset($_SESSION['u_id']) && isset($_SESSION['perm_profile']) && $_SESSION['perm_profile'] == 1) {
+					
 					echo '<li><a href="profile.php">Profile</a></li><li><a href="includes/logout.inc.php">Log Out</a></li>';
+				}
+				elseif (isset($_SESSION['u_id'])) {
+					echo '<li><a href="includes/logout.inc.php">Log Out</a></li>';
 				} else {
 					echo '<li><a href="signup.php">Recruitment</a></li><li><a href="login.php">Log In</a></li>';
 				}

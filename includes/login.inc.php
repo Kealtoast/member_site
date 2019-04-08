@@ -16,7 +16,7 @@ session_start();
 			header("Location: ../login.php?login=empty");
 			exit();
 		} else {
-			$sql = "SELECT * FROM users WHERE user_uid='$uid' OR user_email='$uid'";
+			$sql = "SELECT * FROM users WHERE user_uid='$uid' OR  user_email='$uid'";
 			$result = mysqli_query($conn, $sql);
 			$resultCheck = mysqli_num_rows($result);
 
@@ -43,6 +43,9 @@ session_start();
 							$_SESSION['u_instagram'] = $row['user_instagram'];
 							$_SESSION['u_twitter'] = $row['user_twitter'];
 							$_SESSION['u_profile_image'] = $row['user_profile_image'];
+							//Add Permissions to session
+							include_once 'getrole.inc.php';
+
 							header("Location: ../index.php?login=successful");
 							exit();
 						}
