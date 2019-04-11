@@ -73,6 +73,8 @@ function FunctionName($w, $h, $path)
 }
 if (isset($_POST['submit'])) {
 	require_once 'dbh.inc.php';
+	$title = mysqli_real_escape_string($conn, $_POST['title']);
+	$disc = mysqli_real_escape_string($conn, $_POST['desc']);
 	$file = $_FILES['image'];
 	//Exstract all information from file
 	$fileName = $_FILES['image']['name'];
@@ -89,7 +91,8 @@ if (isset($_POST['submit'])) {
 
 	$username = $_SESSION['u_uid'];
 	$userid = $_SESSION['u_id'];
-	$date = date(ymdHi);
+	date_default_timezone_set("America/North_Dakota/Center");
+	$date = date("Y-m-d H:i:s");
 
 	$w = 600;
 	$h = 825;
@@ -111,9 +114,9 @@ if (isset($_POST['submit'])) {
 				}
 				FunctionName($w, $h, $fileDestinationImage);
 				//move_uploaded_file($newImage, $fileDestinationImage);
-				$sql = "INSERT INTO profileimg (user_id, url, upload_date) VALUES ('$userid','".$fileDestinationsql."','$date');";
-				mysqli_query($conn, $sql);
-				header("Location: ../index.php?uploadsuccess");
+				$sql = "INSERT INTO userimg (user_id, picture_url, picture_date, picture_title, picture_disc) VALUES ('$userid','".$fileDestinationsql."','$date','$title','$disc');";
+				$result = mysqli_query($conn, $sql);				
+				header("Location: ../index.php?upload=success");
 			} else {
 				echo "Your file is to big";
 			}

@@ -53,6 +53,35 @@ include_once 'header.php';
 								</div>
 								
 							</div>
+						</form>
+					</div>
+				</div>
+				<!--Section for Gallery image upload-->
+				<div clsss="row">
+					<div class="col-xs-12">
+					<form action="includes/upload.gallery.inc.php" method="POST" enctype="multipart/form-data">
+						<div class="input-group">
+
+							<div class="input-group input-group-lg">
+								<div class="input-group-prepend">
+									<span class="input-group-text" id="inputGroup-sizing-lg">Title</span>
+								</div>
+								<input type="text" name="title" class="form-control">
+							</div>
+							<div class="">
+								<div class="input-group-prepend">
+									<span class="input-group-text">Description</span>
+								</div>
+								<textarea class="form-control" rows="4" name="desc"></textarea>
+							</div>
+							<input class="custom-file-input image" type="file" name="image">
+							<button class="btn btn-outline-secondary" type="submit" name="submit">UPLOAD</button>
+					</form>
+					</div>
+				</div>
+			</div>	
+		</div>
+
 
 </section>
 <?php 

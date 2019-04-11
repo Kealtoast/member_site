@@ -10,7 +10,3 @@ require_once 'header.php';
  <?php require_once 'footer.php';
   ?>
 
-  12.24571428571429
-  24.89
-  34.99
-  4.998571428571429
